@@ -17,14 +17,8 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
       - name: Build with Gradle
-        if: exists('gradlew')
-        run: ./gradlew build
-      - name: Build with Maven
-        if: exists('pom.xml')
-        run: mvn -B package --file pom.xml
-      - name: Run tests with Gradle
-        if: exists('gradlew')
-        run: ./gradlew test
-      - name: Run tests with Maven
-        if: exists('pom.xml')
-        run: mvn test
+          run: |
+            if [ -f gradlew ]; then ./gradlew build && ./gradlew test; fi
+        - name: Build and test with Maven
+          run: |
+            if [ -f pom.xml ]; then mvn -B package --file pom.xml && mvn test; fi
