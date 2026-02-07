@@ -1,0 +1,30 @@
+name: Java CI
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Set up JDK
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+      - name: Build with Gradle
+        if: exists('gradlew')
+        run: ./gradlew build
+      - name: Build with Maven
+        if: exists('pom.xml')
+        run: mvn -B package --file pom.xml
+      - name: Run tests with Gradle
+        if: exists('gradlew')
+        run: ./gradlew test
+      - name: Run tests with Maven
+        if: exists('pom.xml')
+        run: mvn test
