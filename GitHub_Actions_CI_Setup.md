@@ -8,11 +8,11 @@ This project includes example workflows for running automated tests on every pus
 - Installs dependencies from `requirements.txt`
 - Runs tests with `pytest` if a `tests` directory exists
 
-## Java Workflow
+## Java Workflow (JUnit)
 - File: `.github/workflows/java-ci.yml`
-- Uses Java 17 (Temurin distribution)
-- Supports both Gradle and Maven builds
-- Runs tests automatically
+- Uses Java 21 (Temurin distribution)
+- Uses Maven to build and run JUnit tests
+- Example test: see `src/test/java/com/example/cucumberdemo/AdditionTest.java` or `AdditionSteps.java`
 
 ### How to Use
 1. Copy the workflow files into your repository under `.github/workflows/`.
